@@ -1,11 +1,8 @@
 from django.db import models
 
 
-DIFF_CHOICES = (
-    ('easy', 'easy'),
-    ('medium', 'medium'),
-    ('hard', 'hard'),
-)
+
+
 
 class Quiz(models.Model):
     name = models.CharField(max_length=120)
