@@ -11,6 +11,12 @@ home
 
 {% block content %}
 
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Sign up</button>
+</form>
+
 <!-- Modal -->
 <div class="modal fade" id="quizStartModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -38,9 +44,7 @@ home
         data-pk="{{obj.pk}}"
         data-quiz="{{obj.name}}"
         data-questions="{{obj.number_of_questions}}"
-        data-difficulty="{{obj.difficluty}}"
         data-time="{{obj.time}}"
-        data-pass = "{{obj.required_score_to_pass}}"
         data-toggle="modal"
         data-target="#quizStartModal">
         {{obj.topic}}

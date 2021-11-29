@@ -1,3 +1,5 @@
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.edit import CreateView
 from django.db.models.base import Model
 from django.shortcuts import render
 from .models import Quiz
@@ -5,6 +7,10 @@ from django.views.generic import ListView
 from django.http import JsonResponse, request
 from questions.models import Question, Answer
 from results.models import Result
+
+class SignUpView(CreateView):
+    template_name = 'quizes/main.html'
+    form_class = UserCreationForm
 
 class QuizListView(ListView):
     model = Quiz 

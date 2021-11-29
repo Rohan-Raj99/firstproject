@@ -27,7 +27,7 @@ const activateTimer = (time) => {
         }
         if (minutes.toString().length < 2) {
             displayMinutes = '0'+minutes
-        } else {
+        } else { 
             displayMinutes = minutes
         }
         if(seconds.toString().length < 2) {
@@ -105,7 +105,7 @@ const sendData = () => {
             console.log(results)
             quizForm.classList.add('not-visible')
 
-            scoreBox.innerHTML = `${response.passed ? 'Congratulations! ' : 'Ups..:( '}Your result is ${response.score.toFixed(2)}%`
+            
 
             results.forEach(res=>{
                 const resDiv = document.createElement("div")

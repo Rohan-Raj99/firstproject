@@ -9,6 +9,7 @@ from .views import (
 app_name = 'quizes'
 
 urlpatterns = [
+    path(r'^signup/$', views.SignUpView.as_view(), name='signup'),
     path('', QuizListView.as_view(), name='main-view'),
     path('<pk>/', quiz_view, name='quiz-view'),
     path('<pk>/save/', save_quiz_view, name='save-view'),
