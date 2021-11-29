@@ -1,8 +1,7 @@
-from django.db.models.base import Model
 from django.shortcuts import render
 from .models import Quiz
 from django.views.generic import ListView
-from django.http import JsonResponse, request
+from django.http import JsonResponse
 from questions.models import Question, Answer
 from results.models import Result
 
@@ -42,11 +41,10 @@ def save_quiz_view(request, pk):
         print(questions)
 
         user = request.user
-        # stuname = 
-        # mail=
         quiz = Quiz.objects.get(pk=pk)
 
         score = 0
+        multiplier = 100 / quiz.number_of_questions
         results = []
         correct_answer = None
 
@@ -68,9 +66,10 @@ def save_quiz_view(request, pk):
             else:
                 results.append({str(q): 'not answered'})
             
-        score_ = score
+        score_ = score * multiplier
         Result.objects.create(quiz=quiz, user=user, score=score_)
 
-        return JsonResponse({'score': score_, 'results': results})
-
-
+        if score_ >= quiz.required_score_to_pass:
+            return JsonResponse({'passed': True, 'score': score_, 'results': results})
+        else:
+            return JsonResponse({'passed': False, 'score': score_, 'results': results})
